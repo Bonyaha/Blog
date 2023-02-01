@@ -1,0 +1,11 @@
+ POST http://localhost:3001/api/blogs HTTP/1.1
+Content-type: application/json
+
+{
+    
+    "title": "CSS is easy",
+    "author": "Jack Finch",
+    "url": "http://something",
+    "likes": 9   
+    
+  }
