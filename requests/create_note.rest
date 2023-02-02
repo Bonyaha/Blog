@@ -3,9 +3,9 @@ Content-type: application/json
 
 {
     
-    "title": "CSS is easy",
-    "author": "Jack Finch",
-    "url": "http://something",
-    "likes": 9   
+    "title": "I like Python",
+    "author": "Roman Skidan",
+    "url": "http://datacamp",
+    "likes": 10  
     
   }
