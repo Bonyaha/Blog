@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', false)
@@ -14,7 +16,7 @@ mongoose
     console.log('error connecting to MongoDB:', error.message)
   })
 const blogSchema = new mongoose.Schema({
-  title: String,
+  title: { type: String, required: true },
   author: String,
   url: String,
   likes: Number,

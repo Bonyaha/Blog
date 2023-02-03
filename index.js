@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 require('dotenv').config()
 const express = require('express')
 const app = express()
@@ -38,9 +40,6 @@ app.get('/api/blogs/:id', (request, response, next) => {
 })
 app.post('/api/blogs', (request, response) => {
   const body = request.body
-  if (body.title === undefined) {
-    return response.status(400).json({ error: 'title is missing' })
-  }
 
   const blog = new Blog({
     title: body.title,
@@ -68,6 +67,8 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
   }
 
   next(error)
