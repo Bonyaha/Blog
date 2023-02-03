@@ -1,6 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-require('dotenv').config()
+
+const app = require('./app') // the actual Express application
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
+
+/* require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -79,4 +88,4 @@ app.use(errorHandler)
 const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
-})
+}) */
