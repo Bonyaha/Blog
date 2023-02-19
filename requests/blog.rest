@@ -1,0 +1,26 @@
+ GET http://localhost:3001/api/blogs
+ 
+
+
+ 
+###
+POST http://localhost:3001/api/blogs HTTP/1.1
+Content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJpZCI6IjYzZWUzMzE0ZDI4YzQzODM2YTEzMWRhZiIsImlhdCI6MTY3NjczMDMyNywiZXhwIjoxNjc2NzMzOTI3fQ.Z7_9wor5JmVpvSjYX_BKiSK2LKiWJTOejo2UQhZ09Qc
+
+{   
+    "title": "Test789977897897",
+    "author": "Roman Skidan",
+    "url": "http://datacamp.com",
+    "likes": 15
+    
+  }
+
+
+###
+
+DELETE http://localhost:3001/api/blogs/63f0b6dfee05a56307115da3
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJpZCI6IjYzZWUzMzE0ZDI4YzQzODM2YTEzMWRhZiIsImlhdCI6MTY3NjczNzIyMSwiZXhwIjoxNjc2NzQwODIxfQ.aZisfFvu5xaNjLSX6FQv4L9E5JmlofQWO1btNe0u-QE
+
+
+  

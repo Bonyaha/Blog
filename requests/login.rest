@@ -1,0 +1,11 @@
+POST http://localhost:3001/api/login HTTP/1.1
+Content-type: application/json
+
+{
+    
+    "username": "Test",
+    "password": "sweet_pussy"
+    
+  }
+
+  //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJpZCI6IjYzZWUzMzE0ZDI4YzQzODM2YTEzMWRhZiIsImlhdCI6MTY3NjczNzIyMSwiZXhwIjoxNjc2NzQwODIxfQ.aZisfFvu5xaNjLSX6FQv4L9E5JmlofQWO1btNe0u-QE
