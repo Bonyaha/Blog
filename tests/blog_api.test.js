@@ -72,8 +72,10 @@ describe('when there is initially some blogs saved', () => {
 
   test('there is a property named id', async () => {
     const response = await api.get('/api/blogs')
-    const ids = response.body.map((r) => r.id)
-    expect(ids[0]).toBeDefined()
+
+    for (const blog of response.body) {
+      expect(blog.id).toBeDefined()
+    }
   }, 100000)
 })
 
@@ -110,7 +112,7 @@ describe('addition of a new blog', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
-      .expect(400)
+      .expect(401)
       .expect('Content-Type', /application\/json/)
 
     const blogsAtEnd = await helper.blogsInDb()
