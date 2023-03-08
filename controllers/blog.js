@@ -1,6 +1,6 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/Blog')
-const { userExtractor } = require('../utils/middleware')
+const { userExtractor, checkToken } = require('../utils/middleware')
 
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 })
@@ -33,9 +33,11 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
     url: body.url,
     likes: body.likes || 0,
     user: user.id,
+    checked: body.checked,
   })
 
   const savedBlog = await blog.save()
+  await savedBlog.populate('user', { username: 1, name: 1 })
 
   user.blogs = user.blogs.concat(savedBlog._id)
   await user.save()
@@ -43,35 +45,36 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
   response.status(201).json(savedBlog)
 })
 
-blogsRouter.delete('/:id', userExtractor, async (request, response) => {
+blogsRouter.delete('/', userExtractor, async (request, response) => {
   if (!request.token) {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
 
   const user = request.user
+  const blogIds = request.body.ids
 
-  const blog = await Blog.findById(request.params.id)
-  if (blog && blog.user.toString() === user.id.toString()) {
-    await Blog.findByIdAndRemove(request.params.id)
+  const result = await Blog.deleteMany({ _id: { $in: blogIds }, user: user.id })
+  if (result.deletedCount > 0) {
     return response.status(204).end()
   }
   return response.status(401).json({
-    error: 'Unauthorized to access the blog',
+    error: 'Unauthorized to access the notes',
   })
 })
 
 blogsRouter.put('/:id', async (request, response) => {
   const body = request.body
-
+  console.log(body)
   const blog = {
     title: body.title,
     author: body.author,
     url: body.url,
     likes: body.likes,
+    checked: body.checked,
   }
   const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
     new: true,
-  })
+  }).populate('user', { username: 1, name: 1 })
   response.json(updatedBlog)
 })
 

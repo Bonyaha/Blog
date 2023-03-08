@@ -17,6 +17,7 @@ const blogSchema = new mongoose.Schema({
     required: true,
   },
   likes: Number,
+  checked: Boolean,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 })
 
