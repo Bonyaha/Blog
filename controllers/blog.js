@@ -1,5 +1,5 @@
 const blogsRouter = require('express').Router()
-const Blog = require('../models/Blog')
+const Blog = require('../models/blog')
 const { userExtractor } = require('../utils/middleware')
 
 blogsRouter.get('/', async (request, response) => {
@@ -46,12 +46,13 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
 })
 
 blogsRouter.delete('/', userExtractor, async (request, response) => {
-  if (!request.token) {
+  if (!request.token || !request.user) {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
 
   const user = request.user
   const blogIds = request.body.ids
+  console.log(`blogIds: ${blogIds}`)
 
   const result = await Blog.deleteMany({ _id: { $in: blogIds }, user: user.id })
   if (result.deletedCount > 0) {

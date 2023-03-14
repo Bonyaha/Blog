@@ -22,7 +22,7 @@ const loginWithTestUser = async () => {
   return response.body.token
 }
 
-beforeAll(async () => {
+/* beforeAll(async () => {
   await User.deleteMany({})
   const user = {
     username: helper.user.username,
@@ -34,7 +34,7 @@ beforeAll(async () => {
     .send(user)
     .set('Accept', 'application/json')
     .expect('Content-Type', /application\/json/)
-})
+}) */
 
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -160,8 +160,9 @@ describe('deletion of a blog', () => {
     const blogToDelete = blogsAtStart[0]
 
     await api
-      .delete(`/api/blogs/${blogToDelete.id}`)
+      .delete('/api/blogs/')
       .set('Authorization', `bearer ${token}`)
+      .send({ ids: [blogToDelete.id] })
       .expect(204)
 
     const blogsAtEnd = await helper.blogsInDb()
