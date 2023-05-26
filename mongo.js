@@ -38,4 +38,4 @@ Blog.find({}).then((result) => {
   })
   mongoose.connection.close()
 })
-//mongodb+srv://Bosher:3nFmlSNQl6AsLKIC@cluster0.megdfbi.mongodb.net/noteApp?retryWrites=true&w=majority
+
